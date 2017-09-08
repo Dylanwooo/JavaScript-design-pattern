@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //this方法创建对象和方法
+        let Book = function (id,bookName,price) {
+            this.id = id;
+            this.bookname = bookName;
+            this.price = price;
+            this.showPrice = function () {
+                console.log(price);
+            }
+        };
+
+        //通过prototype的方式创建对象和方法
+        Book.prototype = {
+            isExpensive:true,
+
+            display:function () {
+                console.log("hahah");
+            }
+        };
+        //点语法创建静态公有方法
+        Book.display = function () {
+            console.log("hahah");
+        };
+
+        let book = new Book(1,'england',14);
+        //Book类可以访问到点语法创建的静态共有方法
+        Book.display();
+        //类的对象可以访问prototype创建的方法
+        book.display();
+        console.log(book.id);
+        book.showPrice();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
