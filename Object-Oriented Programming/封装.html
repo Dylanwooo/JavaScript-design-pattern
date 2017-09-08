@@ -13,11 +13,9 @@
                 console.log(price);
             }
         };
-
         //通过prototype的方式创建对象和方法
         Book.prototype = {
-            isExpensive:true,
-
+            isExpensive : "yes",
             display:function () {
                 console.log("hahah");
             }
@@ -26,12 +24,12 @@
         Book.display = function () {
             console.log("hahah");
         };
-
         let book = new Book(1,'england',14);
         //Book类可以访问到点语法创建的静态共有方法
         Book.display();
         //类的对象可以访问prototype创建的方法
         book.display();
+        console.log(book.isExpensive);
         console.log(book.id);
         book.showPrice();
     </script>

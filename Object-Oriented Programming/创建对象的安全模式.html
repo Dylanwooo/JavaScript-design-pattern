@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let Book = function (title,time,type) {
+            //判断this是否为当前对象，若是则用该对象创建
+            if(this instanceof Book){
+                this.title = title;
+                this.time = time;
+                this.type = type;
+            }
+            //否则重新创建这个对象
+            else
+                return new Book(title,time,type);
+        };
+        /*使用这种方式是为了防止创建对象的时候忘记使用new来创建，而导致直接运行Book函数(而不是类)，
+        改函数是运行在全局作用域中，所有this指向的是window
+         */
+
+        //所以这两种方式创建的对象都是Book的实例
+        let book = Book('javascript','2014','前端开发');
+        let book2 = Book('javascript','2014','前端开发');
+        console.log(book);
+        console.log(book2);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
