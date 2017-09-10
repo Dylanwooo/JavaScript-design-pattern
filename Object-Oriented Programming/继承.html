@@ -40,14 +40,47 @@
         SuperClass2.prototype = new SuperClass2();
         SubClass2.prototype.getTime = function () {
             console.log(this.time);
-        }
-        var ins1 = new SubClass2('js book','2014');
+        };
+        let ins1 = new SubClass2('js book','2014');
         ins1.books.push('设计模式');
         console.log(ins1.books);
 
         //这个时候两个实例的增加或删除不会互相影响了
-        var ins2 = new SubClass2('haha','2018');
+        let ins2 = new SubClass2('haha','2018');
         console.log(ins2.books);
+
+        /* 原型式继承*/
+        function inhertObject(obj) {
+            function F() {}
+            F.prototype = obj;
+            return new F();
+        }
+        let book = {
+            name:"java book",
+            alikeBook:['css book','html book']
+        };
+        let newBook = inhertObject(book);
+        newBook.name = 'react book';
+        newBook.alikeBook.push('vue book');
+        //不会相互影响
+        console.log(newBook);
+        console.log(book);
+
+        /*寄生继承,依托于原型式继承*/
+        let book2 = {
+            name:"js book",
+            alikeBook:['css book','html book']
+        };
+        //对原型继承的第二次封装，再对继承的对象进行拓展
+        function createBook(obj) {
+            let o = new inhertObject(obj);
+            o.getName = function () {
+                console.log(name);
+            };
+            return o;
+        }
+        console.log(createBook(book2));
+
     </script>
 </head>
 <body>
