@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深拷贝</title>
+    <script>
+        //判断类型
+        function getType(obj){
+            //tostring会返回对应不同的标签的构造函数
+            let toString = Object.prototype.toString;
+            let map = {
+                '[object Boolean]'  : 'boolean',
+                '[object Number]'   : 'number',
+                '[object String]'   : 'string',
+                '[object Function]' : 'function',
+                '[object Array]'    : 'array',
+                '[object Date]'     : 'date',
+                '[object RegExp]'   : 'regExp',
+                '[object Undefined]': 'undefined',
+                '[object Null]'     : 'null',
+                '[object Object]'   : 'object'
+            };
+            if(obj instanceof Element) {
+                return 'element';
+            }
+            return map[toString.call(obj)];
+        }
+        function deepClone(data){
+            let type = getType(data);
+            let obj;
+            if(type === 'array'){
+                obj = [];
+            } else if(type === 'object'){
+                obj = {};
+            } else {
+                //不再具有下一层次
+                return data;
+            }
+            if(type === 'array'){
+                for(let i = 0, len = data.length; i < len; i++){
+                    obj.push(deepClone(data[i]));
+                }
+            } else if(type === 'object'){
+                for(let key in data){
+                    obj[key] = deepClone(data[key]);
+                }
+            }
+            return obj;
+        }
+        //测试
+        let obj = { a:1, arr: [2,3] };
+        let testObj = deepClone(obj);
+        //因为是深拷贝，指向不同地址，改变其中一个不会影响另一个
+        testObj.a = 1000;
+        console.log(testObj);
+        console.log(obj);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
