@@ -62,7 +62,7 @@
         let newBook = inhertObject(book);
         newBook.name = 'react book';
         newBook.alikeBook.push('vue book');
-        //不会相互影响
+        //会相互影响
         console.log(newBook);
         console.log(book);
 
@@ -80,6 +80,7 @@
             return o;
         }
         console.log(createBook(book2));
+
 
     </script>
 </head>
